@@ -50,11 +50,11 @@ def gradient_descent(x1_0, x2_0, f, alpha, gmin, kmax, diff_fin=True):
 
 
 def item_a(diff_fin=True):
-    X0 = np.random.uniform(low=-1.5, high=1.5, size=2)
+    X0 = np.random.uniform(low=0, high=5.5, size=2)
     # X0 = [-0.99530908  1.30724695]
     # X0 = [0, -2]  
-    
-    X0 = [-0.64231882 , 0.57173843]
+    print (X0)
+    # X0 = [-0.64231882 , 0.57173843]
     X_gradient = gradient_descent(X0[0], X0[1], f, 0.2, gmin=0.01, kmax=70)
     # if diff_fin
     # TODO: fazer dois tipos
@@ -125,8 +125,13 @@ def item_c():
 # item a
 # X0 = [-0.78764362 , -0.65387373]
 # X0 = [-0.64231882 , 0.57173843]
+# X0 = [1.90047238 3.87944662] Descida bonita
 
-# xg, yg = item_a()
+xg, yg = item_a()
+Fx = [f(X[0], X[1]) for X in xg]
+plt.plot(Fx)
+plt.show()
+
 # print (xg)
 # item_b()
-item_c()
+# item_c()
