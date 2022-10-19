@@ -37,9 +37,7 @@ fig, ax = plt.subplots()
 ax.plot(X, Y)
 ax.set_title("$x{}:{:.3f}, f(x{}):{:.3f}, f'(x{}):{:.3f}$".format(0, X[0], 0, Y[0], 0, f1(X[0])))
 
-j = 0
 def animate(i):
-    # global j    
     ax.clear()
     ax.plot(X, Y)
     x = Xgradiente[i]
