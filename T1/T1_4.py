@@ -49,13 +49,13 @@ def gradient_descent(x1_0, x2_0, f, alpha, gmin, kmax, diff_fin=True):
     return X
 
 
-def item_a(diff_fin=True):
+def item_a(diff_fin=True, f=None):
     X0 = np.random.uniform(low=0, high=5.5, size=2)
     # X0 = [-0.99530908  1.30724695]
     # X0 = [0, -2]  
-    print (X0)
+    # X0 = [1.90047238, 3.87944662]
     # X0 = [-0.64231882 , 0.57173843]
-    X_gradient = gradient_descent(X0[0], X0[1], f, 0.2, gmin=0.01, kmax=70)
+    X_gradient = gradient_descent(X0[0], X0[1], f, 0.2, gmin=0.1, kmax=70)
     # if diff_fin
     # TODO: fazer dois tipos
     Y_gradient = [f(x[0], x[1]) for x in X_gradient]
@@ -90,29 +90,37 @@ Z = np.array(zarray)
 
 
 def item_c():
+    """
+    Plota X1, X2 e o valor da função aplicando o gradiente
+    """
     # plot the surface
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     # plt3d = plt.figure().gca(projection='3d')
-    ax.plot_surface(X1, X2, Z, alpha=0.2)
+    # ax.plot_surface(X1, X2, Z, alpha=0.2)
     ax.set_xlabel("X1")
     ax.set_ylabel("X2")
     # ax.set_ylabel("X2")
 
     Xg, Yg = item_a()
+    Xg = np.array(Xg)
+    ax.plot(Xg[:, 0], Xg[:, 1], Yg)
+    ax.plot(Xg[:, 0], Xg[:, 1], np.zeros_like(Yg), c='red')
+    ax.scatter([Xg[0, 0]], [Xg[0, 1]], c='green')
+    ax.scatter([Xg[-1, 0]], [Xg[-1, 1]], c='black')
     
-    def animate(i):
-        ax.clear()
-        ax.plot_surface(X1, X2, Z, alpha=0.2)
-        x1, x2 = Xg[i]
-        y = Yg[i]
-        ax.scatter([x1], [x2], [y], c='green')
-        # flinha = f1(x)
-        # print ('flinha', flinha)
+    # def animate(i):
+    #     ax.clear()
+    #     ax.plot_surface(X1, X2, Z, alpha=0.2)
+    #     x1, x2 = Xg[i]
+    #     y = Yg[i]
+    #     ax.scatter([x1], [x2], [y], c='green')
+    #     # flinha = f1(x)
+    #     # print ('flinha', flinha)
         
-        ax.set_title("k:{}".format(i)) 
+    #     ax.set_title("k:{}".format(i)) 
     
-    ani = animation.FuncAnimation(fig, animate, frames=np.arange(1,len(Xg)), interval=500)
+    # ani = animation.FuncAnimation(fig, animate, frames=np.arange(1,len(Xg)), interval=500)
 
     # Ensure that the next plot doesn't overwrite the first plot  
 
@@ -127,11 +135,11 @@ def item_c():
 # X0 = [-0.64231882 , 0.57173843]
 # X0 = [1.90047238 3.87944662] Descida bonita
 
-xg, yg = item_a()
-Fx = [f(X[0], X[1]) for X in xg]
-plt.plot(Fx)
-plt.show()
+# xg, yg = item_a()
+# Fx = [f(X[0], X[1]) for X in xg]
+# plt.plot(Fx)
+# plt.show()
 
 # print (xg)
 # item_b()
-# item_c()
+item_c()
