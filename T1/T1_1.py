@@ -1,3 +1,13 @@
+"""
+Primeiro trabalho: Descida de gradiente (Questão 1)
+Disciplina: Redes Neurais Artificiais
+Prof.: Thomas Rauber
+Grupo:
+- Alan Carlos Pereira Pinto
+- Alexander de Oliveira da Silva
+- Iran Freitas Ribeiro
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use("seaborn")

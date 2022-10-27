@@ -1,3 +1,13 @@
+"""
+Primeiro trabalho: Descida de gradiente (Questão 2)
+Disciplina: Redes Neurais Artificiais
+Prof.: Thomas Rauber
+Grupo:
+- Alan Carlos Pereira Pinto
+- Alexander de Oliveira da Silva
+- Iran Freitas Ribeiro
+"""
+
 from sympy import *
 import numpy as np
 
