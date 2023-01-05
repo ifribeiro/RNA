@@ -1,0 +1,33 @@
+Parametros
+
+def define_model(dropouts=[], r=1):
+    """
+    TODO: Ver como reduzir o overfitting do modelo
+    """
+    # definição da CNN
+    m  = models.Sequential()
+    # Convolutional layer com 32 neurônios
+    m.add(layers.Conv2D(int(32/r), (2, 2), activation='relu', input_shape=(13, 2, 2), name='conv1', kernel_regularizer=regularizers.l2(0.01)))
+    m.add(layers.MaxPooling2D((2, 1)))
+    if dropouts[0]:
+        m.add(layers.Dropout(0.4))
+    m.add(layers.Conv2D(int(64/r), (2, 1), activation='relu', name='conv2', kernel_regularizer=regularizers.l2(0.01)))
+    m.add(layers.MaxPooling2D((2, 1)))
+    if dropouts[1]:
+        m.add(layers.Dropout(0.4))
+    m.add(layers.Conv2D(int(64/r), (2, 1), activation='relu', name='conv3', kernel_regularizer=regularizers.l2(0.01)))
+    m.add(layers.Flatten())
+    m.add(layers.Dense(int(8/r), activation='relu'))
+    if dropouts[2]:
+        m.add(layers.Dropout(0.2))
+    # 21 classes: normal (0) e falha (XX)
+    m.add(layers.Dense(2))
+    m.compile(optimizer='Adam', loss=losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
+    return m
+
+# definição do modelo
+cnn = define_model(dropouts=[1, 0, 1], r=1)
+
+# treino
+loss_monitor = callbacks.EarlyStopping(monitor='loss')
+hist = cnn.fit(X_treino, labels_treino, batch_size=64, verbose=1, epochs=200, callbacks=[loss_monitor])
